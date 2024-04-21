@@ -62,6 +62,7 @@ void promedioAnual(int matriz[ANIOS][MESES])
 {
     int acumuladorProduccion=0;
     float promedioAnual=0;
+    int anio;
     printf("\n--------- PROMEDIOS ANUALES ----------\n");
     for (int i = 0; i < ANIOS; i++)
     {
@@ -70,7 +71,8 @@ void promedioAnual(int matriz[ANIOS][MESES])
             acumuladorProduccion = acumuladorProduccion + matriz[i][j];
         }
         promedioAnual=(float)acumuladorProduccion/MESES;
-        printf("El promedio del año [%d] es: %.2f\n", i+1, promedioAnual);
+        anio = obtenerAnio(i);
+        printf("El promedio del año [%d] es: %.2f\n", anio, promedioAnual);
         promedioAnual=0;
         acumuladorProduccion = 0;
     }
