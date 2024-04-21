@@ -16,6 +16,13 @@ int main()
 
     ingresarNombres(punteroACadaPunteroDeCadaNombre);
     mostarNombres(punteroACadaPunteroDeCadaNombre);
+
+    for (int i = 0; i < CANT_NOMBRES; i++)
+    {
+        free(*(punteroACadaPunteroDeCadaNombre + i));
+    }
+    free(punteroACadaPunteroDeCadaNombre);
+    
     return 0;
 }
 
