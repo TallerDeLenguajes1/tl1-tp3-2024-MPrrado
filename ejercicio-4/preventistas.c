@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-#define CANT_MAX_CLIENTES
+#define CANT_MAX_CLIENTES 5
 struct{
     int ProductoID; //Numerado en ciclo iterativo
     int Cantidad; // entre 1 y 10
@@ -21,15 +21,19 @@ struct{
 
 int main()
 {
-    int cantidadClientes;
+    int cantidadClientes = 0;
     cliente *punteroClientes;
     char buffer[100];
+    char *TiposProductos[]={"Galletas","Snack","Cigarrillos","Caramelos","Bebidas"};
 
     printf("---------- INICIO SISTEMA PREVENTISTAS ---------\n\n");
-    while (cantidadClientes <= CANT_MAX_CLIENTES)
+
+    printf("Ingrese la cantidad de clientes: ");
+    scanf("%d", &cantidadClientes);
+    while (cantidadClientes > CANT_MAX_CLIENTES)
     {
         printf("Ingrese la cantidad de clientes: ");
-        scanf("%d", cantidadClientes);
+        scanf("%d", &cantidadClientes);
     }
     punteroClientes = (cliente*) malloc(sizeof(cliente) * cantidadClientes);
     printf("\n---------- Cargue los datos de los clientes ---------- ");
@@ -40,6 +44,7 @@ int main()
         punteroClientes[i].ClienteID = i+1;
 
         printf("Ingrese el nombre del cliente [%d]:", i+1);
+        fflush(stdin);
         fgets(buffer, 100, stdin);
 
         punteroClientes[i].NombreCliente= (char*) malloc(sizeof(char) * strlen(buffer) + 1);
@@ -53,10 +58,14 @@ int main()
         for (int j = 0; j < punteroClientes[i].CantidadProductosAPedir; j++)
         {
             punteroClientes[i].Productos[j].ProductoID = j+1;
-            punteroClientes[i].Productos[j]. = j+1;
-        }
+            punteroClientes[i].Productos[j].Cantidad = rand()%10+1;
+            int indice = rand()%5;
+            punteroClientes[i].Productos[j].TipoProducto = (char *) malloc(sizeof(char) * strlen(TiposProductos[indice]+1));
         
-
+            strcpy(punteroClientes[i].Productos[j].TipoProducto, TiposProductos[indice]);
+            puts(punteroClientes[i].Productos[j].TipoProducto);
+            punteroClientes[i].Productos[j].PrecioUnitario = rand()%101+10;
+        }
         
     }
     
